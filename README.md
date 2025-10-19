@@ -1,16 +1,24 @@
-# React + Vite
+# Live Chess Tournament
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project allows users to view the current state of a chess tournament.
+It includes an admin module to upload the JSON file from Swiss Sys and manage player dismissals.
 
-Currently, two official plugins are available:
+# Dependencies Details
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Added Dependencies
 
-## React Compiler
+- **react-router-dom** - for page routing
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+# How to Install and Run
 
-## Expanding the ESLint configuration
+1. Clone the repository.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. Open the project in your terminal.
+
+3. Run `npm install`
+
+4. Run `npm run dev`
+
+5. Open your browser and go to `localhost` using the port number shown in the terminal.
+
+# API Details
