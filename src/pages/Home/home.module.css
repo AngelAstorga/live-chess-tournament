@@ -1,0 +1,29 @@
+.HomeWrapper {
+  display: flex;
+  column-gap: 25px;
+}
+.HomeMenu {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.HomeMenu__sections {
+  color: var(--white);
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+.HomeMain__title {
+  color: var(--gold);
+}
+.HomeMenu__sectionsWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.HomeMain__roundsWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 13px;
+}
