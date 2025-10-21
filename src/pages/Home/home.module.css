@@ -1,6 +1,15 @@
 .HomeWrapper {
   display: flex;
+  flex-direction: column;
   column-gap: 25px;
+}
+.HomeHeader {
+  display: flex;
+  column-gap: 5px;
+}
+.HomeBody {
+  display: flex;
+  column-gap: 33px;
 }
 .HomeMenu {
   width: 120px;
@@ -14,8 +23,33 @@
   padding-bottom: 20px;
   font-size: 20px;
 }
-.HomeMain__title {
+.HomeMain__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+}
+.HomeMain__headerTitle {
   color: var(--gold);
+}
+.HomeMain__headerOptions {
+  display: flex;
+  column-gap: 7px;
+}
+.HomeMain__headerOptionContainer {
+  background-color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+}
+.HomeMain__headerOption {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-color: transparent;
 }
 .HomeMenu__sectionsWrapper {
   display: flex;

@@ -1,0 +1,11 @@
+.TournamentCardWrapper {
+  border: 1px solid white;
+  border-radius: 3px;
+  padding: 5px 15px;
+  color: white;
+  cursor: pointer;
+}
+.TournamentCardWrapper:hover {
+  color: var(--main-background-color);
+  background-color: white;
+}
