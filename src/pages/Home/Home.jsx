@@ -2,17 +2,53 @@ import style from "./home.module.css";
 import RoundCard from "../../shared/RoundCard/RoundCard";
 import SectionCard from "../../shared/SectionCard/SectionCard";
 import TournamentCard from "../../shared/TournamentCard/TournamentCard";
+import NewTournamentModal from "../../shared/ui/modals/newTournamentModal";
 import imgPlus from "../../assets/icons/plus.png";
 import imgUpdate from "../../assets/icons/Sync.png";
 import imgLink from "../../assets/icons/Link.png";
+import { useEffect, useState } from "react";
 function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [listTournaments, setLisTournaments] = useState([]);
+
+  async function loadTournaments(idUser) {
+    const payLoad = JSON.stringify({
+      idUser: idUser,
+    });
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: payLoad,
+    };
+    try {
+      const resp = await fetch(
+        "https://innovastorga.com/chesstournaments/php/getTournaments.php",
+        options
+      );
+      if (!resp.ok) {
+        throw new Error(resp.message);
+      }
+      const tournaments = await resp.json();
+      setLisTournaments(tournaments.tournaments);
+      console.log(tournaments);
+    } catch (err) {
+      console.log("There's an error", err);
+    }
+  }
+
+  useEffect(() => {
+    loadTournaments(1);
+  }, []);
+
   return (
     <div className={style.HomeWrapper}>
+      {isOpen && <NewTournamentModal setIsOpen={setIsOpen} />}
       <div className={style.HomeHeader}>
-        <TournamentCard tournament={{ name: "tournament 1" }} />
-        <TournamentCard tournament={{ name: "tournament 2" }} />
-        <TournamentCard tournament={{ name: "tournament 3" }} />
-        <TournamentCard tournament={{ name: "tournament 4" }} />
+        {listTournaments.map((tournament) => {
+          return (
+            <TournamentCard tournament={{ name: tournament.nameTournament }} />
+          );
+        })}
       </div>
       <div className={style.HomeBody}>
         <div className={style.HomeMenu}>
@@ -28,7 +64,12 @@ function Home() {
           <div className={style.HomeMain__header}>
             <h1 className={style.HomeMain__headerTitle}>ELITE QUADS 2025</h1>
             <div className={style.HomeMain__headerOptions}>
-              <div className={style.HomeMain__headerOptionContainer}>
+              <div
+                className={style.HomeMain__headerOptionContainer}
+                onClick={() => {
+                  setIsOpen(true);
+                }}
+              >
                 <img
                   className={style.HomeMain__headerOption}
                   src={imgPlus}

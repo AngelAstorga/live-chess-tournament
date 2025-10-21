@@ -1,0 +1,24 @@
+.NewTournamentModalWrapper {
+  position: absolute;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(33, 33, 33, 0.95);
+  top: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.NewTournamentModalContainer {
+  background-color: aqua;
+  width: 320px;
+  height: 150px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.NewTournamentModal__uploadIcon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
