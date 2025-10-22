@@ -13,6 +13,7 @@ function Home() {
   const [listTournaments, setLisTournaments] = useState([]);
   const [tournamentDetails, setTournamentDetails] = useState({});
   const [players, setPlayers] = useState([]);
+  const [currentSection, setCurrentSection] = useState(null);
 
   async function loadTournaments(idUser) {
     const payLoad = JSON.stringify({
@@ -45,7 +46,13 @@ function Home() {
 
   return (
     <div className={style.HomeWrapper}>
-      {isOpen && <NewTournamentModal setIsOpen={setIsOpen} />}
+      {isOpen && (
+        <NewTournamentModal
+          setIsOpen={setIsOpen}
+          setLisTournaments={setLisTournaments}
+          listTournaments={listTournaments}
+        />
+      )}
       <div className={style.HomeHeader}>
         {listTournaments.map((tournament) => {
           return (
@@ -59,16 +66,30 @@ function Home() {
       <div className={style.HomeBody}>
         <div className={style.HomeMenu}>
           <h3 className={style.HomeMenu__sections}>Sections</h3>
-          <div className={style.HomeMenu__sectionsWrapper}>
-            <SectionCard />
-            <SectionCard />
-            <SectionCard />
-            <SectionCard />
-          </div>
+          {tournamentDetails.sections != null ? (
+            <div className={style.HomeMenu__sectionsWrapper}>
+              <SectionCard />
+              <SectionCard />
+              <SectionCard />
+              <SectionCard />
+            </div>
+          ) : (
+            <div>No sections</div>
+          )}
+          <button className={style.HomeDismissalButton}>Dismissal</button>
         </div>
         <div className={style.HomeMain}>
           <div className={style.HomeMain__header}>
-            <h1 className={style.HomeMain__headerTitle}>ELITE QUADS 2025</h1>
+            {tournamentDetails.title != null ? (
+              <h1 className={style.HomeMain__headerTitle}>
+                {tournamentDetails.name}
+              </h1>
+            ) : (
+              <h1 className={style.HomeMain__headerTitle}>
+                CREATE A NEW TOURNAMENT
+              </h1>
+            )}
+
             <div className={style.HomeMain__headerOptions}>
               <div
                 className={style.HomeMain__headerOptionContainer}
@@ -98,15 +119,23 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className={style.HomeMain__roundsWrapper}>
-            <RoundCard />
-            <RoundCard />
-            <RoundCard />
-            <RoundCard />
-          </div>
+          {currentSection != null ? (
+            <div className={style.HomeMain__roundsWrapper}>
+              <RoundCard />
+              <RoundCard />
+              <RoundCard />
+              <RoundCard />
+            </div>
+          ) : (
+            <div className={style.HomeMain__roundsWrapper}> Pick a Section</div>
+          )}
         </div>
         <div className={style.HomeRanking}>
-          <Ranking players={players} />
+          {currentSection != null ? (
+            <Ranking players={players} />
+          ) : (
+            <div className={style.HomeMain__roundsWrapper}> </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import style from "./NewTournamentModal.module.css";
 import imgUpload from "../../../assets/icons/Upload to Cloud.png";
-function NewTournamentModal({ setIsOpen }) {
+function NewTournamentModal({ setIsOpen, listTournaments, setLisTournaments }) {
   const [fileName, setFileName] = useState("");
   const [tournamentData, setTournamentData] = useState(null);
   const [tournamentPayLoad, setTournamentPayLoad] = useState({
@@ -58,7 +58,11 @@ function NewTournamentModal({ setIsOpen }) {
     }
     const players = getPlayers(tournamentData.Sections);
     const payLoad = JSON.stringify({
-      tournamentData: { ...tournamentPayLoad, tournamentPlayers: players },
+      tournamentData: {
+        ...tournamentPayLoad,
+        tournamentPlayers: players,
+        tournamentLink: tournamentLink,
+      },
     });
     const options = {
       method: "PUT",
@@ -76,6 +80,14 @@ function NewTournamentModal({ setIsOpen }) {
       }
       const newTournament = await resp.json();
       console.log(newTournament);
+      setIsOpen(false);
+      setLisTournaments([
+        ...listTournaments,
+        {
+          nameTournament: tournamentName,
+          idTournament: newTournament.new_tournament_id,
+        },
+      ]);
     } catch (err) {
       console.log("Error with sending tournament Data", err);
     }
