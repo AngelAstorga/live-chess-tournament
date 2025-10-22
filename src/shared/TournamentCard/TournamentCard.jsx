@@ -1,5 +1,14 @@
 import style from "./TournamentCard.module.css";
-function TournamentCard({ tournament }) {
-  return <div className={style.TournamentCardWrapper}>{tournament.name}</div>;
+function TournamentCard({ tournament, handleGetDetails }) {
+  return (
+    <div
+      className={style.TournamentCardWrapper}
+      onClick={() => {
+        handleGetDetails(tournament.id);
+      }}
+    >
+      {tournament.name}
+    </div>
+  );
 }
 export default TournamentCard;

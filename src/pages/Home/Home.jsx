@@ -8,12 +8,14 @@ import imgPlus from "../../assets/icons/plus.png";
 import imgUpdate from "../../assets/icons/Sync.png";
 import imgLink from "../../assets/icons/Link.png";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [listTournaments, setLisTournaments] = useState([]);
   const [tournamentDetails, setTournamentDetails] = useState({});
   const [players, setPlayers] = useState([]);
   const [currentSection, setCurrentSection] = useState(null);
+  const navigate = useNavigate();
 
   async function loadTournaments(idUser) {
     const payLoad = JSON.stringify({
@@ -44,6 +46,38 @@ function Home() {
     loadTournaments(1);
   }, []);
 
+  const handleVisitDismissal = (idTournament, tournamentDetails) => {
+    if (idTournament != null) {
+      navigate("/dismissal", {
+        state: {
+          tournamentDetails: tournamentDetails,
+        },
+      });
+    }
+  };
+
+  async function getTournamentsDetails(idTournament) {
+    const url = new URL(
+      "https://innovastorga.com/chesstournaments/php/getTournamentsDetails.php"
+    );
+    url.searchParams.append("idTournament", idTournament);
+    const options = {
+      method: "GET",
+      headers: {},
+    };
+    try {
+      const resp = await fetch(url, options);
+      if (!resp.ok) {
+        throw new Error(resp.message);
+      }
+      const tournamentDetails = await resp.json();
+      //{idTournament:,nameTournament:,players:[]} structure
+      setTournamentDetails({ ...tournamentDetails });
+      console.log(tournamentDetails);
+    } catch (err) {
+      console.log("There's an error", err);
+    }
+  }
   return (
     <div className={style.HomeWrapper}>
       {isOpen && (
@@ -58,7 +92,11 @@ function Home() {
           return (
             <TournamentCard
               key={tournament.idTournament}
-              tournament={{ name: tournament.nameTournament }}
+              tournament={{
+                name: tournament.nameTournament,
+                id: tournament.idTournament,
+              }}
+              handleGetDetails={getTournamentsDetails}
             />
           );
         })}
@@ -76,7 +114,17 @@ function Home() {
           ) : (
             <div>No sections</div>
           )}
-          <button className={style.HomeDismissalButton}>Dismissal</button>
+          <button
+            onClick={() => {
+              handleVisitDismissal(
+                tournamentDetails.idTournament,
+                tournamentDetails
+              );
+            }}
+            className={style.HomeDismissalButton}
+          >
+            Dismissal
+          </button>
         </div>
         <div className={style.HomeMain}>
           <div className={style.HomeMain__header}>
