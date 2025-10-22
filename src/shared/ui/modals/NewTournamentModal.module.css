@@ -10,15 +10,69 @@
   align-items: center;
 }
 .NewTournamentModalContainer {
-  background-color: aqua;
+  background-color: white;
+  border-radius: 3px;
   width: 320px;
-  height: 150px;
-  padding: 15px;
+  height: auto;
+  padding: 3px;
   display: flex;
   flex-direction: column;
+}
+.NewTournamentModal__header {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .NewTournamentModal__uploadIcon {
   width: 28px;
   height: 28px;
+  cursor: pointer;
+}
+.NewTournamentModal__message {
+  color: white;
+  padding-right: 15px;
+}
+.NewTournamentModal__fileNameLabel {
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.NewTournamentModal__fileName {
+  font-size: 10px;
+  padding-left: 3px;
+}
+.NewTournamentModal__label {
+  color: var(--gold);
+  padding: 5px 10px;
+}
+.NewTournamentModal__tournamentInput {
+  color: white;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  padding: 3px 7px;
+}
+.NewTournamentModal__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.NewTournamentModal__formItem {
+  display: flex;
+  flex-direction: column;
+}
+.NewTournamentModal__button {
+  align-self: center;
+  border: 0px;
+  padding: 5px 15px;
+  background-color: var(--green);
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
 }

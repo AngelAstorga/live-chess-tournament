@@ -3,6 +3,7 @@ import RoundCard from "../../shared/RoundCard/RoundCard";
 import SectionCard from "../../shared/SectionCard/SectionCard";
 import TournamentCard from "../../shared/TournamentCard/TournamentCard";
 import NewTournamentModal from "../../shared/ui/modals/newTournamentModal";
+import Ranking from "../../features/Ranking/Ranking";
 import imgPlus from "../../assets/icons/plus.png";
 import imgUpdate from "../../assets/icons/Sync.png";
 import imgLink from "../../assets/icons/Link.png";
@@ -10,6 +11,8 @@ import { useEffect, useState } from "react";
 function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [listTournaments, setLisTournaments] = useState([]);
+  const [tournamentDetails, setTournamentDetails] = useState({});
+  const [players, setPlayers] = useState([]);
 
   async function loadTournaments(idUser) {
     const payLoad = JSON.stringify({
@@ -46,7 +49,10 @@ function Home() {
       <div className={style.HomeHeader}>
         {listTournaments.map((tournament) => {
           return (
-            <TournamentCard tournament={{ name: tournament.nameTournament }} />
+            <TournamentCard
+              key={tournament.idTournament}
+              tournament={{ name: tournament.nameTournament }}
+            />
           );
         })}
       </div>
@@ -98,6 +104,9 @@ function Home() {
             <RoundCard />
             <RoundCard />
           </div>
+        </div>
+        <div className={style.HomeRanking}>
+          <Ranking players={players} />
         </div>
       </div>
     </div>
